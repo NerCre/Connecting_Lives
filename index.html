@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>命をツナグ</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Home view -->
+    <section id="home" class="view active">
+      <h1 class="app-title">命をツナグ</h1>
+      <p class="tagline">状況に応じて適切な行動をとれるようサポートします。</p>
+      <div class="button-container">
+        <button id="btnEmergency" class="btn btn-emergency">
+          緊急事態<br /><span class="en">(EMERGENCY)</span>
+        </button>
+        <button id="btnUnsure" class="btn btn-unsure">
+          判断に迷う時<br /><span class="en">(UNSURE?)</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Emergency view -->
+    <section id="emergency" class="view">
+      <h2>緊急通報</h2>
+      <p>
+        関係者に通知を送信しました。すぐに安全な場所へ移動し、
+        救急車（119）を呼んでください。
+      </p>
+      <p class="small">※このデモでは通知送信をシミュレーションしています。</p>
+      <button id="btnBackFromEmergency" class="btn btn-back">戻る</button>
+    </section>
+
+    <!-- Decision support view -->
+    <section id="decision" class="view">
+      <h2>判断支援</h2>
+      <!-- Step 1: ask if the person is conscious -->
+      <div id="step1" class="step active">
+        <p class="question">意識はありますか？</p>
+        <div class="options">
+          <button class="option" data-answer="yes">
+            <!-- open eye icon -->
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 5C7 5 2.73 8.11 1 12c1.73 3.89 6 7 11 7s9.27-3.11 11-7c-1.73-3.89-6-7-11-7zm0 12c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10a4 4 0 100 8 4 4 0 000-8z"
+                fill="currentColor"
+              />
+            </svg>
+            はい<br /><span class="en small">Yes</span>
+          </button>
+          <button class="option" data-answer="no">
+            <!-- closed eye icon (eye with slash) -->
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 5c-2.73 0-5.31.81-7.5 2.22L2.5 5.22 1.08 6.64l2.24 2.24C2.47 10.35 1.74 11.15 1 12c1.73 3.89 6 7 11 7 1.89 0 3.67-.43 5.28-1.2l3.64 3.64 1.41-1.42-18-18L4.79 5.22C6.61 4.44 8.75 4 11 4c5 0 9.27 3.11 11 7-.55 1.23-1.31 2.36-2.25 3.33l1.45 1.45C22.12 14.8 23 13.46 23 12c-1.73-3.89-6-7-11-7zM12 15c-3.31 0-6-2.69-6-6 0-.62.09-1.21.26-1.78l1.53 1.53a4 4 0 005.5 5.5l1.53 1.53c-.57.17-1.16.26-1.78.26z"
+                fill="currentColor"
+              />
+            </svg>
+            いいえ<br /><span class="en small">No</span>
+          </button>
+        </div>
+      </div>
+      <!-- Step 2: ask where the injury is -->
+      <div id="step2" class="step">
+        <p class="question">出血・痛みの場所をタップしてください。</p>
+        <div id="body-container">
+          <!-- Simple human body silhouette with clickable parts -->
+          <svg id="body-svg" viewBox="0 0 200 500">
+            <!-- Head -->
+            <circle cx="100" cy="50" r="30" class="body-part" data-part="head" />
+            <!-- Torso -->
+            <rect x="70" y="80" width="60" height="120" rx="20" class="body-part" data-part="torso" />
+            <!-- Left arm -->
+            <rect x="30" y="90" width="30" height="100" rx="15" class="body-part" data-part="leftArm" />
+            <!-- Right arm -->
+            <rect x="140" y="90" width="30" height="100" rx="15" class="body-part" data-part="rightArm" />
+            <!-- Left leg -->
+            <rect x="70" y="210" width="30" height="120" rx="15" class="body-part" data-part="leftLeg" />
+            <!-- Right leg -->
+            <rect x="100" y="210" width="30" height="120" rx="15" class="body-part" data-part="rightLeg" />
+          </svg>
+        </div>
+      </div>
+      <!-- Step 3: result -->
+      <div id="step3" class="step">
+        <p id="result-message" class="result-message"></p>
+        <div class="result-buttons">
+          <button id="btnRestart" class="btn btn-secondary">もう一度
+          </button>
+          <button id="btnHomeFromResult" class="btn btn-secondary">ホームへ戻る
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
